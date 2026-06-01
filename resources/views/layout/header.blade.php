@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-custom">
+<nav class="navbar navbar-dark navbar-custom" style="background: linear-gradient(135deg, #0054A6 0%, #003d7a 100%); box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);">
     <div class="container-fluid">
         <button class="btn btn-link text-white d-lg-none me-2" id="sidebarToggle">
             <i class="fas fa-bars fa-lg"></i>
@@ -6,17 +6,17 @@
         <a class="navbar-brand" href="{{ route('dashboard') }}">
             <div class="header-logo">
                 <div class="header-logo-icon">
-                    <i class="fas fa-heartbeat"></i>
+                    <i class="fas fa-wind"></i>
                 </div>
                 <div>
-                    JoMonitor
+                    RESPA-Jo
                 </div>
             </div>
         </a>
         <div class="ms-auto d-flex align-items-center">
             <ul class="navbar-nav flex-row align-items-center">
                 <li class="nav-item dropdown">
-                    <a class="nav-link position-relative" href="#" role="button" id="notificationDropdown" 
+                    <a class="nav-link position-relative text-white" href="#" role="button" id="notificationDropdown" 
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         <span class="notification-badge" id="notificationCount" style="display: none;">0</span>
@@ -51,9 +51,9 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown user-menu">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown">
                         <div class="user-dropdown">
-                            <div class="user-avatar">
+                            <div class="user-avatar" style="background: rgba(255,255,255,0.2);">
                                 <i class="fas fa-user"></i>
                             </div>
                             <div>
@@ -123,7 +123,7 @@
     
     .notification-item.unread {
         background-color: #f0f7ff;
-        border-left-color: #007bff;
+        border-left-color: #0054A6;
     }
     
     .notification-title {
@@ -156,8 +156,8 @@
     }
     
     .notification-icon.suhu {
-        background: rgba(13, 110, 253, 0.1);
-        color: #0d6efd;
+        background: rgba(0, 84, 166, 0.1);
+        color: #0054A6;
     }
     
     .notification-icon.infus {
@@ -173,6 +173,86 @@
     .notification-icon.critical {
         background: rgba(220, 53, 69, 0.1);
         color: #dc3545;
+    }
+
+    /* Custom Navbar Styles - Gradasi Biru seperti Landing & Login */
+    .navbar-custom {
+        background: linear-gradient(135deg, #0054A6 0%, #003d7a 100%) !important;
+    }
+
+    .navbar-custom .navbar-brand {
+        color: white !important;
+    }
+
+    .navbar-custom .nav-link {
+        color: rgba(255, 255, 255, 0.9) !important;
+        transition: all 0.3s ease;
+    }
+
+    .navbar-custom .nav-link:hover {
+        color: white !important;
+        transform: translateY(-1px);
+    }
+
+    .user-dropdown {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: white;
+    }
+
+    .user-avatar {
+        width: 35px;
+        height: 35px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .user-dropdown:hover .user-avatar {
+        background: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .header-logo-icon {
+        font-size: 1.8rem;
+        color: white;
+    }
+
+    .header-logo div:last-child {
+        font-weight: 700;
+        font-size: 1.3rem;
+        letter-spacing: 0.5px;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        margin-top: 10px;
+    }
+
+    .dropdown-item:active {
+        background: linear-gradient(135deg, #0054A6 0%, #003d7a 100%);
+    }
+
+    /* Button styling */
+    .btn-link {
+        text-decoration: none;
+    }
+
+    .btn-link:hover {
+        opacity: 0.9;
     }
 </style>
 
@@ -276,9 +356,9 @@ class NotificationManager {
         
         // Update title tab jika ada notifikasi baru
         if (count > 0 && !document.hidden) {
-            document.title = `(${count}) JoMonitor - Monitoring System`;
+            document.title = `(${count}) RESPA-Jo - Monitoring System`;
         } else if (document.title.startsWith('(')) {
-            document.title = 'JoMonitor - Monitoring System';
+            document.title = 'RESPA-Jo - Monitoring System';
         }
     }
     
