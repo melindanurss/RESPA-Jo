@@ -8,6 +8,7 @@ class VerifyCsrfToken extends Middleware
 {
     protected $except = [
         '/contohinput',
+        '/monitoring/bme280',
         '/monitoringsuhu',
         '/rooms',
         '/api/*'

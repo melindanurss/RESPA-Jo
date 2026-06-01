@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('judul', 'Monitoring Suhu')
+@section('judul', 'Monitoring Suhu, Kelembaban & Tekanan Udara')
 
 @section('head')
 <style>
@@ -30,7 +30,7 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(135deg, #7ABF55 0%, #61C5C3 50%, #6DC18A 100%);
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 50%, #00BCD4 100%);
     }
     
     .card:hover {
@@ -59,8 +59,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(135deg, rgba(122, 191, 85, 0.1) 0%, rgba(97, 197, 195, 0.1) 100%);
-        color: #2E8B57;
+        background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(3, 169, 244, 0.1) 100%);
+        color: #2196F3;
     }
     
     .card-icon i {
@@ -71,7 +71,7 @@
         font-size: 2.2rem;
         font-weight: 700;
         margin-bottom: 10px;
-        background: linear-gradient(135deg, #7ABF55 0%, #61C5C3 100%);
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 1.2;
@@ -107,6 +107,16 @@
         color: #856404;
         border: 1px solid #ffeaa7;
     }
+    
+    /* Pressure Specific Badge */
+    .pressure-badge {
+        background: #e3f2fd;
+        color: #1565c0;
+        border: 1px solid #bbdefb;
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        border-radius: 8px;
+    }
 
     /* Combined Data Section */
     .data-section {
@@ -125,7 +135,7 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(135deg, #7ABF55 0%, #61C5C3 50%, #6DC18A 100%);
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 50%, #00BCD4 100%);
     }
 
     .section-header {
@@ -183,8 +193,8 @@
     }
 
     .filter-select:focus, .filter-input:focus {
-        border-color: #3498db;
-        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+        border-color: #2196F3;
+        box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
         background: white;
         outline: none;
     }
@@ -249,7 +259,7 @@
     }
 
     .btn-apply {
-        background: linear-gradient(135deg, #7ABF55 0%, #61C5C3 100%);
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
         border: none;
         color: white;
         padding: 8px 20px;
@@ -265,7 +275,7 @@
 
     .btn-apply:hover {
         transform: translateY(-1px);
-        box-shadow: 0 3px 10px rgba(122, 191, 85, 0.2);
+        box-shadow: 0 3px 10px rgba(33, 150, 243, 0.2);
     }
 
     .btn-reset {
@@ -318,8 +328,8 @@
     }
 
     .search-box input:focus {
-        border-color: #3498db;
-        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        border-color: #2196F3;
+        box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
         background: white;
         outline: none;
     }
@@ -380,6 +390,13 @@
         font-size: 12px;
         color: #7f8c8d;
     }
+    
+    /* Pressure Value Styling */
+    .pressure-value {
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        color: #1565c0;
+    }
 
     /* Pagination */
     .pagination-container {
@@ -419,7 +436,7 @@
     }
 
     .pagination-controls button.active {
-        background: linear-gradient(135deg, #7ABF55 0%, #61C5C3 100%);
+        background: linear-gradient(135deg, #2196F3 0%, #03A9F4 100%);
         color: white;
         border-color: transparent;
     }
@@ -473,7 +490,7 @@
         height: 50px;
         border: 5px solid rgba(255, 255, 255, 0.3);
         border-radius: 50%;
-        border-top-color: #3498db;
+        border-top-color: #2196F3;
         animation: spin 1s ease-in-out infinite;
     }
 
@@ -514,7 +531,7 @@
         height: 20px;
         border: 3px solid rgba(0,0,0,.1);
         border-radius: 50%;
-        border-top-color: #3498db;
+        border-top-color: #2196F3;
         animation: spin 1s ease-in-out infinite;
         margin-right: 10px;
     }
@@ -581,8 +598,8 @@
 <!-- Page Header -->
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
     <div>
-        <h1 class="h3 fw-bold text-dark">Monitoring Suhu Ruangan</h1>
-        <p class="text-muted">Sistem monitoring real-time suhu ruangan</p>
+        <h1 class="h3 fw-bold text-dark">Monitoring Suhu, Kelembaban & Tekanan Udara</h1>
+        <p class="text-muted">Sistem monitoring real-time dengan sensor BME280</p>
     </div>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group me-2">
@@ -617,7 +634,7 @@
         <div class="card-value" id="totalDevices">0</div>
         <div class="card-footer">
             <i class="fas fa-info-circle text-primary"></i>
-            <span>Total device suhu aktif</span>
+            <span>Total device BME280 aktif</span>
         </div>
     </div>
     
@@ -651,21 +668,21 @@
     
     <div class="card">
         <div class="card-header">
-            <div class="card-title">Total Data</div>
+            <div class="card-title">Tekanan Udara Rata-rata</div>
             <div class="card-icon">
-                <i class="fas fa-database"></i>
+                <i class="fas fa-tachometer-alt"></i>
             </div>
         </div>
-        <div class="card-value" id="totalData">0</div>
+        <div class="card-value" id="avgPressure">0</div>
         <div class="card-footer">
             <i class="fas fa-info-circle text-info"></i>
-            <span id="totalDataInfo">Total data monitoring</span>
+            <span id="avgPressureInfo">Rata-rata tekanan udara (hPa)</span>
         </div>
     </div>
 </div>
 
-<!-- Status Suhu per Device -->
-<div class="section-title">Status Suhu per Device</div>
+<!-- Status per Device -->
+<div class="section-title">Status per Device</div>
 <div class="table-responsive mb-4">
     <table class="table table-striped table-hover">
         <thead class="table-light">
@@ -675,13 +692,14 @@
                 <th>Nama Ruang</th>
                 <th>Suhu (°C)</th>
                 <th>Kelembaban (%)</th>
+                <th>Tekanan Udara (hPa)</th>
                 <th>Status</th>
                 <th>Update Terakhir</th>
             </tr>
         </thead>
         <tbody id="deviceStatusBody">
             <tr>
-                <td colspan="7" class="text-center text-muted">
+                <td colspan="8" class="text-center text-muted">
                     <i class="fas fa-spinner fa-spin me-2"></i>Memuat data...
                 </td>
             </tr>
@@ -693,8 +711,8 @@
 <div class="data-section">
     <!-- Header -->
     <div class="section-header">
-        <h3 class="section-title">Riwayat Log Suhu</h3>
-        <p class="section-subtitle">Monitoring dan filter data suhu ruangan secara real-time</p>
+        <h3 class="section-title">Riwayat Log Monitoring</h3>
+        <p class="section-subtitle">Monitoring dan filter data suhu, kelembaban & tekanan udara secara real-time</p>
     </div>
     
     <!-- Filter Section -->
@@ -827,13 +845,14 @@
                             <th>RUANG</th>
                             <th>SUHU (°C)</th>
                             <th>KELEMBABAN (%)</th>
+                            <th>TEKANAN UDARA (hPa)</th>
                             <th>STATUS SUHU</th>
                             <th>STATUS KELEMBABAN</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
                         <tr>
-                            <td colspan="7" class="text-center text-muted">
+                            <td colspan="8" class="text-center text-muted">
                                 <i class="fas fa-spinner fa-spin me-2"></i>Memuat data monitoring...
                             </td>
                         </tr>
@@ -865,16 +884,16 @@
 @endsection
 
 @section('Modal')
-<!-- Modal Device Suhu -->
+<!-- Modal Device BME280 -->
 <div class="modal fade" id="modalDeviceSuhu" tabindex="-1" aria-labelledby="modalDeviceSuhuLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header d-flex align-items-start gap-2">
         <div>
           <h5 class="modal-title" id="modalDeviceSuhuLabel">
-            <i class="fas fa-thermometer-half me-2"></i> Daftar Device Suhu
+            <i class="fas fa-thermometer-half me-2"></i> Daftar Device BME280
           </h5>
-          <small class="text-muted">CRUD device tanpa refresh</small>
+          <small class="text-muted">CRUD device sensor BME280 (Suhu, Kelembaban, Tekanan Udara)</small>
         </div>
         <div class="ms-auto d-flex gap-2">
           <button id="btnShowCreate" type="button" class="btn btn-sm btn-success">+ Tambah Device</button>
@@ -891,12 +910,13 @@
                 <div class="col-md-6">
                   <label class="form-label">Device Key *</label>
                   <input id="deviceKey" class="form-control" required maxlength="255" />
-                  <small class="text-muted">Unique identifier untuk device</small>
+                  <small class="text-muted">Unique identifier untuk device BME280</small>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Tipe Device *</label>
                   <select id="deviceType" class="form-select" required>
-                    <option value="suhu">Suhu</option>
+                    <option value="bme280">BME280 (Suhu, Kelembaban, Tekanan)</option>
+                    <option value="suhu">Suhu (DHT22)</option>
                     <option value="infus">Infus</option>
                   </select>
                 </div>
@@ -941,7 +961,7 @@
                     <h5 class="modal-title" id="modalRuanganLabel">
                         <i class="fas fa-door-open me-2"></i> Manajemen Ruangan
                     </h5>
-                    <small class="text-muted">Kelola data ruangan dan device</small>
+                    <small class="text-muted">Kelola data ruangan dan device BME280</small>
                 </div>
                 <div class="ms-auto d-flex gap-2">
                     <button id="btnShowCreateRoom" type="button" class="btn btn-sm btn-success">
@@ -1020,7 +1040,7 @@
                                 <th>Suhu</th>
                                 <th>Kelembaban</th>
                                 <th>Status</th>
-                                <th style="width:180px">Aksi</th>
+                                <th style="width:220px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="roomsTbody">
@@ -1048,7 +1068,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body py-4">
-                <p class="text-muted small mb-3">Pindai kode QR ini untuk memantau suhu & kelembaban secara langsung di ruangan <strong id="qrRoomName"></strong> tanpa login.</p>
+                <p class="text-muted small mb-3">Pindai kode QR ini untuk memantau suhu, kelembaban & tekanan udara secara langsung di ruangan <strong id="qrRoomName"></strong> tanpa login.</p>
                 <div class="d-inline-block p-3 bg-white rounded-3 shadow-sm border mb-3">
                     <img id="qrCodeImage" src="" alt="QR Code" style="width: 250px; height: 250px; display: block; margin: 0 auto;">
                 </div>
@@ -1071,7 +1091,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalExportLabel">
-                    <i class="fas fa-download me-2"></i> Ekspor Data Monitoring
+                    <i class="fas fa-download me-2"></i> Ekspor Data Monitoring BME280
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -1174,7 +1194,7 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
     // ============================================
-    // KONFIGURASI GLOBAL
+    // KONFIGURASI GLOBAL - BME280 MONITORING
     // ============================================
     const API_BASE = '{{ url("/") }}';
     const CSRF_TOKEN = '{{ csrf_token() }}';
@@ -1194,7 +1214,7 @@
     // INISIALISASI UTAMA
     // ============================================
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Initializing Monitoring System...');
+        console.log('Initializing BME280 Monitoring System...');
         
         // Inisialisasi komponen
         initializeDatePickers();
@@ -1206,7 +1226,7 @@
         // Start auto-refresh setiap 30 detik
         startAutoRefresh();
         
-        console.log('Monitoring System initialized successfully!');
+        console.log('BME280 Monitoring System initialized successfully!');
     });
     
     // ============================================
@@ -1223,7 +1243,7 @@
                 loadDropdownData()        // Dropdown filter
             ]);
             
-            showAlert('success', 'Sistem monitoring berhasil dimuat!');
+            showAlert('success', 'Sistem monitoring BME280 berhasil dimuat!');
             
         } catch (error) {
             console.error('Error loading initial data:', error);
@@ -1241,7 +1261,6 @@
         try {
             console.log('Loading dashboard data...');
             
-            // Build query parameters sesuai dengan filter yang aktif
             const params = new URLSearchParams({
                 device: document.getElementById('filterDevice')?.value || 'Semua',
                 ruangan: document.getElementById('filterRuangan')?.value || 'Semua',
@@ -1253,7 +1272,7 @@
                 sampai_jam: document.getElementById('filterSampaiJam')?.value || ''
             });
             
-            const response = await fetch(`${API_BASE}/monitoring/suhu/dashboard?${params}`, {
+            const response = await fetch(`${API_BASE}/monitoring/bme280/dashboard?${params}`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-CSRF-TOKEN': CSRF_TOKEN
@@ -1269,10 +1288,13 @@
                     document.getElementById('totalDevices').textContent = formatNumber(result.data.total_devices || 0);
                     document.getElementById('normalDevices').textContent = formatNumber(result.data.normal_devices || 0);
                     document.getElementById('warningDevices').textContent = formatNumber(result.data.warning_devices || 0);
-                    document.getElementById('totalData').textContent = formatNumber(result.data.total_data || 0);
                     
-                    // Update info text untuk total data
-                    updateTotalDataInfo();
+                    // Update tekanan udara rata-rata
+                    const avgPressure = result.data.avg_pressure || 0;
+                    document.getElementById('avgPressure').textContent = formatNumber(avgPressure) + ' hPa';
+                    
+                    // Update info text untuk tekanan udara
+                    updatePressureInfo();
                     
                     // Update device status table
                     updateDeviceStatusTable(result.data.device_status || []);
@@ -1289,16 +1311,16 @@
         }
     }
 
-    // Fungsi untuk update info text total data berdasarkan filter
-    function updateTotalDataInfo() {
-        const infoElement = document.getElementById('totalDataInfo');
+    // Fungsi untuk update info text tekanan udara
+    function updatePressureInfo() {
+        const infoElement = document.getElementById('avgPressureInfo');
         if (!infoElement) return;
         
         const deviceFilter = document.getElementById('filterDevice')?.value;
         const roomFilter = document.getElementById('filterRuangan')?.value;
         const dateFilter = document.getElementById('filterDariTanggal')?.value;
         
-        let infoText = 'Total data monitoring';
+        let infoText = 'Rata-rata tekanan udara (hPa)';
         
         if (deviceFilter && deviceFilter !== 'Semua') {
             infoText += ` (Device: ${deviceFilter})`;
@@ -1322,9 +1344,9 @@
         if (!devices || devices.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
+                    <td colspan="8" class="text-center text-muted py-4">
                         <i class="fas fa-microchip-slash me-2"></i>
-                        <div>Tidak ada device aktif</div>
+                        <div>Tidak ada device BME280 aktif</div>
                         <small class="text-muted mt-2">Tambahkan device di menu Device dan tetapkan ke ruangan</small>
                     </td>
                 </tr>
@@ -1335,6 +1357,7 @@
         tbody.innerHTML = devices.map(device => {
             const statusClass = getStatusBadgeClass(device.status_overall);
             const normalizedStatus = normalizeStatus(device.status_overall);
+            const pressureValue = device.tekanan_udara ? device.tekanan_udara + ' hPa' : '--';
             
             return `
                 <tr>
@@ -1346,11 +1369,12 @@
                                 <small class="text-muted">${escapeHtml(device.device)}</small>
                             </div>
                         </div>
-                    </td>
+                     </td>
                     <td><code>${escapeHtml(device.ruang_id)}</code></td>
                     <td>${escapeHtml(device.ruang_nama)}</td>
                     <td class="fw-bold">${device.suhu}°C</td>
                     <td>${device.kelembaban}%</td>
+                    <td class="pressure-value">${pressureValue}</td>
                     <td><span class="badge ${statusClass}">${escapeHtml(normalizedStatus)}</span></td>
                     <td class="timestamp">
                         <i class="fas fa-clock me-1 text-muted"></i>
@@ -1368,7 +1392,6 @@
         showLoading();
         
         try {
-            // Build query parameters
             const params = new URLSearchParams({
                 page: page,
                 per_page: perPage,
@@ -1382,7 +1405,7 @@
                 sampai_jam: document.getElementById('filterSampaiJam')?.value || ''
             });
             
-            const response = await fetch(`${API_BASE}/monitoring/suhu/data?${params}`, {
+            const response = await fetch(`${API_BASE}/monitoring/bme280/data?${params}`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-CSRF-TOKEN': CSRF_TOKEN
@@ -1392,7 +1415,6 @@
             if (response.ok) {
                 const result = await response.json();
                 if (result.success) {
-                    // Normalisasi data status sebelum disimpan ke cache
                     const normalizedData = (result.data || []).map(item => {
                         return {
                             ...item,
@@ -1404,9 +1426,6 @@
                     monitoringDataCache = normalizedData;
                     updateMonitoringTable(monitoringDataCache);
                     updatePagination(result);
-                    
-                    // PERBARUI TOTAL DATA secara dinamis
-                    await updateTotalData();
                     
                     hideLoading();
                     return;
@@ -1422,42 +1441,6 @@
         }
     }
     
-    // FUNGSI UTAMA: Update total data secara dinamis berdasarkan filter
-    async function updateTotalData() {
-        try {
-            const params = new URLSearchParams({
-                device: document.getElementById('filterDevice')?.value || 'Semua',
-                ruangan: document.getElementById('filterRuangan')?.value || 'Semua',
-                status_suhu: document.getElementById('filterStatus')?.value || 'Semua',
-                status_kelembaban: document.getElementById('filterKelembaban')?.value || 'Semua',
-                dari_tanggal: document.getElementById('filterDariTanggal')?.value || '',
-                dari_jam: document.getElementById('filterDariJam')?.value || '',
-                sampai_tanggal: document.getElementById('filterSampaiTanggal')?.value || '',
-                sampai_jam: document.getElementById('filterSampaiJam')?.value || ''
-            });
-            
-            const response = await fetch(`${API_BASE}/monitoring/suhu/total-data?${params}`, {
-                headers: {
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': CSRF_TOKEN
-                }
-            });
-            
-            if (response.ok) {
-                const result = await response.json();
-                if (result.success) {
-                    document.getElementById('totalData').textContent = formatNumber(result.total_data || 0);
-                    updateTotalDataInfo();
-                    console.log('Total data updated:', result.total_data);
-                    return result.total_data;
-                }
-            }
-        } catch (error) {
-            console.error('Error updating total data:', error);
-        }
-        return 0;
-    }
-    
     function updateMonitoringTable(data) {
         const tbody = document.getElementById('tableBody');
         if (!tbody) return;
@@ -1465,7 +1448,7 @@
         if (!data || data.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
+                    <td colspan="8" class="text-center text-muted py-4">
                         <i class="fas fa-database me-2"></i>Tidak ada data yang ditemukan
                     </td>
                 </tr>
@@ -1474,12 +1457,13 @@
         }
         
         tbody.innerHTML = data.map(item => {
-            // Normalisasi status menjadi hanya Normal atau Warning
             const statusSuhu = normalizeStatus(item.status_suhu);
             const statusKelembaban = normalizeStatus(item.status_kelembaban);
             
             const statusSuhuClass = getStatusClass(statusSuhu);
             const statusKelembabanClass = getStatusClass(statusKelembaban);
+            
+            const tekananUdara = item.tekanan_udara ? item.tekanan_udara + ' hPa' : '--';
             
             return `
                 <tr>
@@ -1493,6 +1477,7 @@
                     <td>${escapeHtml(item.ruang)}</td>
                     <td><strong>${item.suhu}°C</strong></td>
                     <td>${item.kelembaban}%</td>
+                    <td class="pressure-value">${tekananUdara}</td>
                     <td>
                         <span class="status-badge ${statusSuhuClass}">
                             ${escapeHtml(statusSuhu)}
@@ -1513,8 +1498,8 @@
     // ============================================
     async function loadDropdownData() {
         try {
-            // Load devices untuk dropdown
-            const devicesResponse = await fetch(`${API_BASE}/monitoring/suhu/devices-filter`, {
+            // Load devices untuk dropdown (termasuk BME280)
+            const devicesResponse = await fetch(`${API_BASE}/monitoring/bme280/devices-filter`, {
                 headers: { 'Accept': 'application/json' }
             });
             
@@ -1556,11 +1541,11 @@
         devicesCache.forEach(device => {
             const option = document.createElement('option');
             option.value = device.device_key;
-            option.textContent = device.name || device.device_key;
+            const deviceType = device.device_type === 'bme280' ? ' [BME280]' : '';
+            option.textContent = (device.name || device.device_key) + deviceType;
             select.appendChild(option);
         });
         
-        // Restore selection
         if (selectedValue && Array.from(select.options).some(opt => opt.value === selectedValue)) {
             select.value = selectedValue;
         }
@@ -1586,7 +1571,6 @@
             }
         });
         
-        // Restore selection
         if (selectedValue && Array.from(select.options).some(opt => opt.value === selectedValue)) {
             select.value = selectedValue;
         }
@@ -1595,42 +1579,33 @@
     // ============================================
     // STATUS NORMALIZATION FUNCTIONS
     // ============================================
-    // Fungsi untuk mengubah semua status menjadi hanya Normal atau Warning
     function normalizeStatus(status) {
         if (!status) return 'Normal';
         
         const statusLower = status.toLowerCase();
         
-        // Mapping semua status menjadi hanya Normal atau Warning
         if (statusLower.includes('normal')) return 'Normal';
         
-        // Semua status selain normal dianggap Warning
         return 'Warning';
     }
     
-    // Fungsi untuk mendapatkan class CSS berdasarkan status
     function getStatusClass(status) {
         if (!status) return 'status-normal';
         
         const statusLower = status.toLowerCase();
         
-        // Hanya dua status yang diizinkan: NORMAL dan WARNING
         if (statusLower.includes('normal')) return 'status-normal';
         
-        // Semua status selain normal dianggap Warning
         return 'status-warning';
     }
     
-    // Fungsi untuk mendapatkan badge class
     function getStatusBadgeClass(status) {
         if (!status) return 'bg-secondary';
         
         const statusLower = status.toLowerCase();
         
-        // Hanya dua status: Normal (success) dan Warning (warning)
         if (statusLower.includes('normal')) return 'bg-success';
         
-        // Semua status selain normal dianggap Warning
         return 'bg-warning';
     }
     
@@ -1638,13 +1613,9 @@
     // EXPORT FUNCTIONS
     // ============================================
     function showExportModal() {
-        // Load export statistics
         loadExportStats();
-        
-        // Show current filters
         updateExportFilterInfo();
         
-        // Show modal
         const modal = new bootstrap.Modal(document.getElementById('modalExport'));
         modal.show();
     }
@@ -1653,7 +1624,7 @@
         try {
             showLoading();
             
-            const response = await fetch(`${API_BASE}/monitoring/suhu/export-stats`, {
+            const response = await fetch(`${API_BASE}/monitoring/bme280/export-stats`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-CSRF-TOKEN': CSRF_TOKEN
@@ -1689,7 +1660,6 @@
         document.getElementById('currentFilters').textContent = filterText;
     }
 
-    // Toggle custom date range
     document.getElementById('exportRange')?.addEventListener('change', function() {
         const customRangeDiv = document.getElementById('customDateRange');
         if (this.value === 'custom') {
@@ -1707,7 +1677,6 @@
             return;
         }
         
-        // Validate custom date range
         if (exportRange === 'custom') {
             const startDate = document.getElementById('customStart').value;
             const endDate = document.getElementById('customEnd').value;
@@ -1718,14 +1687,12 @@
             }
         }
         
-        // Show confirmation for large data
         if (exportRange === 'all') {
             if (!confirm('Mengekspor SEMUA data bisa menghasilkan file yang sangat besar. Apakah Anda yakin?')) {
                 return;
             }
         }
         
-        // Prepare export data
         const exportData = {
             export_range: exportRange,
             custom_start: exportRange === 'custom' ? document.getElementById('customStart').value : '',
@@ -1743,12 +1710,11 @@
         
         try {
             showLoading();
-            showExportAlert('info', 'Menyiapkan ekspor data...');
+            showExportAlert('info', 'Menyiapkan ekspor data BME280...');
             
-            // Create form and submit
             const form = document.createElement('form');
             form.method = 'POST';
-            form.action = `${API_BASE}/monitoring/suhu/export`;
+            form.action = `${API_BASE}/monitoring/bme280/export`;
             form.style.display = 'none';
             
             Object.keys(exportData).forEach(key => {
@@ -1762,12 +1728,10 @@
             document.body.appendChild(form);
             form.submit();
             
-            // Wait a moment before cleaning up
             setTimeout(() => {
                 document.body.removeChild(form);
                 hideLoading();
                 
-                // Close modal
                 const modal = bootstrap.Modal.getInstance(document.getElementById('modalExport'));
                 if (modal) modal.hide();
                 
@@ -1811,7 +1775,7 @@
     }
     
     // ============================================
-    // DEVICE CRUD FUNCTIONS (Tetap sama seperti sebelumnya)
+    // DEVICE CRUD FUNCTIONS
     // ============================================
     function initializeDeviceModal() {
         const modal = document.getElementById('modalDeviceSuhu');
@@ -1825,7 +1789,6 @@
             return;
         }
         
-        // Modal show event
         modal.addEventListener('show.bs.modal', function() {
             console.log('Device modal opened');
             loadDevices();
@@ -1833,7 +1796,6 @@
             clearDeviceAlert();
         });
         
-        // Show create form
         if (btnShowCreate) {
             btnShowCreate.addEventListener('click', function() {
                 console.log('Create device clicked');
@@ -1841,14 +1803,12 @@
             });
         }
         
-        // Cancel form
         if (btnCancelForm) {
             btnCancelForm.addEventListener('click', function() {
                 hideDeviceForm();
             });
         }
         
-        // Form submit
         if (deviceForm) {
             deviceForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -1857,7 +1817,6 @@
             });
         }
         
-        // Event delegation for edit/delete buttons
         if (tbody) {
             tbody.addEventListener('click', function(e) {
                 const editBtn = e.target.closest('.btn-edit');
@@ -1892,7 +1851,7 @@
         try {
             tbody.innerHTML = '<tr><td colspan="4" class="text-center">Loading...</td></tr>';
             
-            const response = await fetch(`${API_BASE}/device?device_type=suhu`, {
+            const response = await fetch(`${API_BASE}/device?device_type=all`, {
                 headers: {
                     'Accept': 'application/json',
                     'X-CSRF-TOKEN': CSRF_TOKEN
@@ -1909,36 +1868,40 @@
             console.log('Devices data received:', data);
             
             const devices = Array.isArray(data) ? data : [];
+            const bme280Devices = devices.filter(d => d.device_type === 'bme280' || d.device_type === 'suhu');
             
-            if (devices.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Tidak ada device</td></tr>';
+            if (bme280Devices.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">Tidak ada device BME280</td></tr>';
                 if (totalSpan) totalSpan.textContent = '0';
                 return;
             }
             
-            tbody.innerHTML = devices.map((device, index) => `
-                <tr data-id="${device.id}">
-                    <td>${index + 1}</td>
-                    <td>${escapeHtml(device.device_key)}</td>
-                    <td>${escapeHtml(device.device_type)}</td>
-                    <td>
-                        <button class="btn btn-sm btn-outline-primary btn-edit" data-id="${device.id}">
-                            <i class="fas fa-edit me-1"></i>Edit
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${device.id}">
-                            <i class="fas fa-trash me-1"></i>Hapus
-                        </button>
-                    </td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = bme280Devices.map((device, index) => {
+                const typeLabel = device.device_type === 'bme280' ? 'BME280 (3 sensor)' : device.device_type;
+                return `
+                    <tr data-id="${device.id}">
+                        <td>${index + 1}</td>
+                        <td>${escapeHtml(device.device_key)}</td>
+                        <td>${escapeHtml(typeLabel)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary btn-edit" data-id="${device.id}">
+                                <i class="fas fa-edit me-1"></i>Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${device.id}">
+                                <i class="fas fa-trash me-1"></i>Hapus
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
             
-            if (totalSpan) totalSpan.textContent = devices.length;
+            if (totalSpan) totalSpan.textContent = bme280Devices.length;
             
-            console.log('Devices loaded successfully:', devices.length, 'devices');
+            console.log('Devices loaded successfully:', bme280Devices.length, 'devices');
             
         } catch (error) {
             console.error('Error loading devices:', error);
-            tbody.innerHTML = '<tr><td colspan="4" class="text-center text-danger">Gagal memuat data: ' + error.message + '</td></tr>';
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Gagal memuat data: ${error.message}</td></tr>`;
         }
     }
     
@@ -1960,11 +1923,11 @@
         if (mode === 'create') {
             deviceIdInput.value = '';
             deviceKeyInput.value = '';
-            deviceTypeInput.value = 'suhu';
+            deviceTypeInput.value = 'bme280';
         } else if (mode === 'edit' && deviceData) {
             deviceIdInput.value = deviceData.id;
             deviceKeyInput.value = deviceData.device_key || '';
-            deviceTypeInput.value = deviceData.device_type || 'suhu';
+            deviceTypeInput.value = deviceData.device_type || 'bme280';
         }
         
         deviceKeyInput.focus();
@@ -2012,7 +1975,6 @@
         }
         
         console.log('Sending to URL:', url);
-        console.log('Payload:', payload);
         
         try {
             const response = await fetch(url, {
@@ -2035,16 +1997,9 @@
                 throw new Error(result.message || `HTTP ${response.status}: Gagal menyimpan device`);
             }
             
-            // Reload devices
             await loadDevices();
-            
-            // Hide form
             hideDeviceForm();
-            
-            // Show success message
-            showDeviceAlert('success', formMode === 'create' ? 'Device berhasil ditambahkan!' : 'Device berhasil diupdate!');
-            
-            // Update dropdown dan dashboard
+            showDeviceAlert('success', formMode === 'create' ? 'Device BME280 berhasil ditambahkan!' : 'Device berhasil diupdate!');
             loadDropdownData();
             loadDashboardData();
             
@@ -2117,13 +2072,11 @@
             const result = await response.json();
             console.log('Delete response data:', result);
             
-            // Remove from table
             const row = document.querySelector(`#devicesSuhuTbody tr[data-id="${deviceId}"]`);
             if (row) {
                 row.remove();
                 updateRowNumbers('#devicesSuhuTbody');
                 
-                // Update total count
                 const totalSpan = document.getElementById('totalDevicesModal');
                 if (totalSpan) {
                     const currentCount = parseInt(totalSpan.textContent) || 0;
@@ -2132,8 +2085,6 @@
             }
             
             showDeviceAlert('success', result.message || 'Device berhasil dihapus!');
-            
-            // Update dropdown dan dashboard
             loadDropdownData();
             loadDashboardData();
             
@@ -2163,7 +2114,7 @@
     }
     
     // ============================================
-    // ROOM CRUD FUNCTIONS (Tetap sama seperti sebelumnya)
+    // ROOM CRUD FUNCTIONS
     // ============================================
     function initializeRoomModal() {
         const modal = document.getElementById('modalRuangan');
@@ -2177,7 +2128,6 @@
             return;
         }
         
-        // Modal show event
         modal.addEventListener('show.bs.modal', function() {
             console.log('Room modal opened');
             loadRooms();
@@ -2186,7 +2136,6 @@
             loadRoomDropdowns();
         });
         
-        // Show create form
         if (btnShowCreateRoom) {
             btnShowCreateRoom.addEventListener('click', function() {
                 console.log('Create room clicked');
@@ -2194,14 +2143,12 @@
             });
         }
         
-        // Cancel form
         if (btnCancelRoomForm) {
             btnCancelRoomForm.addEventListener('click', function() {
                 hideRoomForm();
             });
         }
         
-        // Form submit
         if (roomForm) {
             roomForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -2210,7 +2157,6 @@
             });
         }
         
-        // Event delegation for edit/delete/reset-wifi buttons
         if (tbody) {
             tbody.addEventListener('click', function(e) {
                 const editBtn = e.target.closest('.btn-edit-room');
@@ -2281,17 +2227,13 @@
     }
 
     function showQRCodeModal(roomId, roomName) {
-        // Build the public link URL dynamically using Laravel url helper
         const publicUrl = "{{ url('/public-monitoring') }}/" + roomId;
-        
-        // Generate QR code using QRServer API
         const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(publicUrl)}`;
         
         document.getElementById('qrRoomName').textContent = roomName;
         document.getElementById('qrCodeImage').src = qrApiUrl;
         document.getElementById('btnOpenPublicLink').href = publicUrl;
         
-        // Printable handler
         document.getElementById('btnPrintQR').onclick = function() {
             const printWindow = window.open('', '_blank');
             printWindow.document.write(`
@@ -2360,8 +2302,8 @@
                 </head>
                 <body>
                     <div class="container">
-                        <h2>📡 JoMonitor</h2>
-                        <p>Pindai untuk memantau & mengontrol langsung kondisi suhu & kelembapan ruangan:<br><strong style="color:#0f172a; font-size:16px;">${roomName}</strong></p>
+                        <h2>📡 JoMonitor BME280</h2>
+                        <p>Pindai untuk memantau & mengontrol langsung kondisi suhu, kelembaban & tekanan udara ruangan:<br><strong style="color:#0f172a; font-size:16px;">${roomName}</strong></p>
                         <div class="qr-box">
                             <img src="${qrApiUrl}" />
                         </div>
@@ -2536,7 +2478,6 @@
         console.log('=== LOAD ROOM DROPDOWNS ===');
         
         try {
-            // Load rooms list untuk dropdown ID Ruang
             const roomsResponse = await fetch(`${API_BASE}/rooms/list`);
             console.log('Rooms Response Status:', roomsResponse.status);
             
@@ -2576,8 +2517,7 @@
                 console.log('Room dropdown loaded:', roomIdSelect.options.length, 'options');
             }
             
-            // Load devices list untuk dropdown Device
-            const devicesResponse = await fetch(`${API_BASE}/device?device_type=suhu`);
+            const devicesResponse = await fetch(`${API_BASE}/device?device_type=all`);
             console.log('Devices Response Status:', devicesResponse.status);
             
             let devicesData = [];
@@ -2587,8 +2527,8 @@
             } else {
                 console.error('Devices list failed:', devicesResponse.status);
                 devicesData = [
-                    { device_key: 'nodemcu1', name: 'nodemcu1' },
-                    { device_key: 'wemos1', name: 'wemos1' }
+                    { device_key: 'nodemcu1', name: 'nodemcu1', device_type: 'bme280' },
+                    { device_key: 'wemos1', name: 'wemos1', device_type: 'bme280' }
                 ];
             }
             
@@ -2597,14 +2537,17 @@
                 deviceSelect.innerHTML = '<option value="">Pilih Device</option>';
                 
                 const devices = Array.isArray(devicesData) ? devicesData : [];
-                devices.forEach(device => {
+                const bme280Devices = devices.filter(d => d.device_type === 'bme280' || d.device_type === 'suhu');
+                
+                bme280Devices.forEach(device => {
                     const deviceKey = device.device_key || device.key || device.id;
                     const deviceName = device.name || deviceKey;
+                    const typeLabel = device.device_type === 'bme280' ? ' [BME280]' : '';
                     
                     if (deviceKey) {
                         const option = document.createElement('option');
                         option.value = deviceKey;
-                        option.textContent = deviceName;
+                        option.textContent = deviceName + typeLabel;
                         deviceSelect.appendChild(option);
                     }
                 });
@@ -2615,7 +2558,6 @@
         } catch (error) {
             console.error('Error loading room dropdowns:', error);
             
-            // Fallback minimal
             const roomIdSelect = document.getElementById('roomIdSelect');
             const deviceSelect = document.getElementById('roomDeviceSelect');
             
@@ -2630,8 +2572,8 @@
             if (deviceSelect) {
                 deviceSelect.innerHTML = `
                     <option value="">Pilih Device</option>
-                    <option value="nodemcu1">nodemcu1</option>
-                    <option value="wemos1">wemos1</option>
+                    <option value="nodemcu1">nodemcu1 [BME280]</option>
+                    <option value="wemos1">wemos1 [BME280]</option>
                 `;
             }
         }
@@ -2661,7 +2603,6 @@
             const statusSelect = document.getElementById('roomStatusSelect');
             if (statusSelect) statusSelect.value = 'active';
             
-            // Reset thresholds
             const tempMinInput = document.getElementById('roomTempMin');
             const tempMaxInput = document.getElementById('roomTempMax');
             const humMinInput = document.getElementById('roomHumMin');
@@ -2673,7 +2614,6 @@
         } else if (mode === 'edit' && roomData) {
             roomIdInput.value = roomData.id;
             if (roomIdSelect) {
-                // Periksa apakah opsi dengan nilai roomData.room_id sudah ada
                 let optionExists = false;
                 for (let i = 0; i < roomIdSelect.options.length; i++) {
                     if (roomIdSelect.options[i].value === roomData.room_id) {
@@ -2682,7 +2622,6 @@
                     }
                 }
                 
-                // Jika belum ada (misalnya ID ruang kustom seperti FAR1), tambahkan secara dinamis
                 if (!optionExists && roomData.room_id) {
                     const customOpt = document.createElement('option');
                     customOpt.value = roomData.room_id;
@@ -2703,7 +2642,6 @@
                 }
             }
             
-            // Populate thresholds
             const tempMinInput = document.getElementById('roomTempMin');
             const tempMaxInput = document.getElementById('roomTempMax');
             const humMinInput = document.getElementById('roomHumMin');
@@ -2745,7 +2683,6 @@
             return;
         }
         
-        // Ambil nama ruangan dari dropdown
         const selectedRoomOption = roomIdSelect?.options[roomIdSelect.selectedIndex];
         let roomName = '';
         
@@ -2761,7 +2698,6 @@
             }
         }
         
-        // Prepare payload
         const statusSelect = document.getElementById('roomStatusSelect');
         const status = statusSelect ? statusSelect.value : 'active';
         
@@ -2823,14 +2759,10 @@
                 throw new Error(result.error || result.message || 'Gagal menyimpan ruangan');
             }
             
-            // SUCCESS
             await loadRooms();
             hideRoomForm();
-            
-            // Update dropdown dan dashboard
             loadDropdownData();
             loadDashboardData();
-            
             showRoomAlert('success', result.message || 'Ruangan berhasil disimpan!');
             
         } catch (error) {
@@ -2889,13 +2821,11 @@
             
             const result = await response.json();
             
-            // Remove from table
             const row = document.querySelector(`#roomsTbody tr[data-id="${roomId}"]`);
             if (row) {
                 row.remove();
                 updateRowNumbers('#roomsTbody');
                 
-                // Update total count
                 const totalSpan = document.getElementById('totalRooms');
                 if (totalSpan) {
                     const currentCount = parseInt(totalSpan.textContent) || 0;
@@ -2904,8 +2834,6 @@
             }
             
             showRoomAlert('success', result.message || 'Ruangan berhasil dihapus!');
-            
-            // Update dashboard
             loadDashboardData();
             
         } catch (error) {
@@ -2961,7 +2889,6 @@
         
         controlsElement.innerHTML = '';
         
-        // Previous button
         const prevButton = document.createElement('button');
         prevButton.className = 'pagination-prev';
         prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
@@ -2969,7 +2896,6 @@
         prevButton.onclick = () => currentPage > 1 && loadMonitoringData(currentPage - 1);
         controlsElement.appendChild(prevButton);
         
-        // Page numbers
         const startPage = Math.max(1, currentPage - 2);
         const endPage = Math.min(totalPages, currentPage + 2);
         
@@ -2981,7 +2907,6 @@
             controlsElement.appendChild(pageButton);
         }
         
-        // Next button
         const nextButton = document.createElement('button');
         nextButton.className = 'pagination-next';
         nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
@@ -3020,7 +2945,6 @@
             if (isVisible) visibleCount++;
         });
         
-        // Update pagination info
         const infoElement = document.getElementById('paginationInfo');
         if (infoElement && searchTerm) {
             infoElement.textContent = `Menampilkan ${formatNumber(visibleCount)} data (filter: "${searchTerm}")`;
@@ -3056,7 +2980,6 @@
                 return;
         }
         
-        // Format date for input (dd/mm/yyyy)
         const formatDate = (date) => {
             const day = date.getDate().toString().padStart(2, '0');
             const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -3064,7 +2987,6 @@
             return `${day}/${month}/${year}`;
         };
         
-        // Format time for input (HH:mm)
         const formatTime = (date) => {
             const hours = date.getHours().toString().padStart(2, '0');
             const minutes = date.getMinutes().toString().padStart(2, '0');
@@ -3076,9 +2998,7 @@
         document.getElementById('filterSampaiTanggal').value = formatDate(endDate);
         document.getElementById('filterSampaiJam').value = formatTime(endDate);
         
-        // Auto load data after 500ms
         setTimeout(() => {
-            updateTotalData();
             loadMonitoringData(1);
         }, 500);
     }
@@ -3132,7 +3052,6 @@
         
         container.insertAdjacentHTML('afterbegin', alertHtml);
         
-        // Auto remove after 5 seconds
         setTimeout(() => {
             const alertElement = document.getElementById(alertId);
             if (alertElement) {
@@ -3171,7 +3090,6 @@
     // AUTO REFRESH FUNCTIONS
     // ============================================
     function startAutoRefresh() {
-        // Auto-refresh dashboard setiap 30 detik
         setInterval(() => {
             refreshDashboard();
         }, 30000);
@@ -3179,10 +3097,8 @@
     
     async function refreshDashboard() {
         try {
-            // Silent refresh untuk dashboard saja
             await loadDashboardData();
             
-            // Refresh monitoring table jika sedang di halaman 1
             if (currentPage === 1) {
                 await loadMonitoringData(1);
             }
@@ -3217,13 +3133,9 @@
     // EVENT LISTENERS INITIALIZATION
     // ============================================
     function initializeEventListeners() {
-        // Initialize device modal
         initializeDeviceModal();
-        
-        // Initialize room modal
         initializeRoomModal();
         
-        // Filter dropdown change events - update total data juga
         const filterElements = [
             'filterDevice',
             'filterRuangan', 
@@ -3239,52 +3151,27 @@
             const element = document.getElementById(id);
             if (element) {
                 element.addEventListener('change', () => {
-                    // Update total data saat filter berubah
                     setTimeout(() => {
-                        updateTotalData();
                         loadMonitoringData(1);
                     }, 300);
                 });
             }
         });
         
-        // Quick filter buttons
-        document.querySelectorAll('.quick-filter-buttons button').forEach(button => {
-            button.addEventListener('click', function() {
-                const rangeType = this.getAttribute('onclick')?.match(/setDateRange\('(.+)'\)/)?.[1];
-                if (rangeType) {
-                    setDateRange(rangeType);
-                }
-            });
-        });
-        
-        // Apply filter button
         const applyBtn = document.querySelector('.btn-apply');
         if (applyBtn) {
             applyBtn.addEventListener('click', () => loadMonitoringData(1));
         }
         
-        // Reset filter button
         const resetBtn = document.querySelector('.btn-reset');
         if (resetBtn) {
             resetBtn.addEventListener('click', resetFilters);
         }
         
-        // Search input
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
             searchInput.addEventListener('keyup', filterTable);
         }
-        
-        // Date input changes
-        ['filterDariTanggal', 'filterDariJam', 'filterSampaiTanggal', 'filterSampaiJam'].forEach(id => {
-            document.getElementById(id)?.addEventListener('change', () => {
-                setTimeout(() => {
-                    updateTotalData();
-                    loadMonitoringData(1);
-                }, 1000);
-            });
-        });
     }
     
     // ============================================

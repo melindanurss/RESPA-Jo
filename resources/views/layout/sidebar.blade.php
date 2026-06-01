@@ -11,22 +11,27 @@
         </div>
 
         <ul class="nav flex-column">
+            <!-- Dashboard -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
                    href="{{ route('dashboard') }}" id="dashboardLink">
                     <i class="fas fa-tachometer-alt"></i> Dashboard
                 </a>
             </li>
+
+            <!-- Sensor DHT22 (Suhu + Kelembaban) -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('monitoring.suhu*') ? 'active' : '' }}"
-                   href="{{ route('monitoring.suhu.index') }}" id="monitoringSuhuLink">
+                <a class="nav-link {{ request()->routeIs('monitoring.suhu') ? 'active' : '' }}"
+                   href="{{ url('/monitoring/suhu') }}" id="monitoringDHT22Link">
                     <i class="fas fa-temperature-low"></i> Sensor DHT22
                 </a>
             </li>
+
+            <!-- Sensor BME280 (Suhu + Kelembaban + Tekanan Udara) -->
             <li class="nav-item">
-                <a class="nav-link {{ request()->routeIs('monitoring.suhu*') ? 'active' : '' }}"
-                   href="{{ route('monitoring.suhu.index') }}" id="monitoringSuhuLink">
-                    <i class="fas fa-cloud-sun"></i> Sensor BME280
+                <a class="nav-link {{ request()->routeIs('monitoring.bme280') ? 'active' : '' }}"
+                   href="{{ url('/monitoring/bme280') }}" id="monitoringBME280Link">
+                    <i class="fas fa-microchip"></i> Sensor BME280
                 </a>
             </li>
         </ul>
@@ -61,7 +66,7 @@
         font-weight: 500;
     }
     
-    /* Hover effect untuk menu (tetap menggunakan gradasi biru, bukan hijau) - Sesuai permintaan Anda, saya gunakan biru gradasi untuk hover agar senada */
+    /* Hover effect untuk menu (tetap menggunakan gradasi biru, bukan hijau) */
     .sidebar .nav-link:hover:not(.active) {
         background: linear-gradient(135deg, rgba(0, 84, 166, 0.1) 0%, rgba(0, 61, 122, 0.1) 100%);
         color: #0054A6 !important;
